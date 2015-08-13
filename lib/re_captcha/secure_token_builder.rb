@@ -1,6 +1,7 @@
 require 'json'
 require 'securerandom'
 require 'openssl'
+require 'base64'
 
 module ReCaptcha
   class SecureTokenBuilder
@@ -16,7 +17,7 @@ module ReCaptcha
 
     def self.encode_token(token, cipher)
       encrypted_token = cipher.update(token) << cipher.final
-      strip_padding Base64.urlsafe_encode64(encrypted_stoken)
+      strip_padding Base64.urlsafe_encode64(encrypted_token)
     end
 
     def self.digest_key(key)

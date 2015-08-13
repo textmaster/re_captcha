@@ -1,3 +1,5 @@
+require 're_captcha/configuration'
+
 module ReCaptcha
   module Configurable
 

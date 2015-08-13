@@ -1,8 +1,8 @@
 require 'rspec/core/rake_task'
 
-desc "Open an irb session with CheckoutSystem preloaded"
+desc "Open an irb session with ReCaptcha preloaded"
 task :console do
-  exec "irb -I lib -r checkout_system"
+  exec "irb -I lib -r re_captcha"
 end
 
 desc "Run the test suite"

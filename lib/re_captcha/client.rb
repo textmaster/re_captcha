@@ -1,3 +1,6 @@
+require 'forwardable'
+require 're_captcha/application'
+
 module ReCaptcha
   class Client
     extend Forwardable
