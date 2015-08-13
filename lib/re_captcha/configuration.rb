@@ -33,5 +33,9 @@ module ReCaptcha
       @language_table[locale] || 'en'
     end
 
+    def valid?
+      !private_key.nil? && !public_key.nil?
+    end
+
   end
 end

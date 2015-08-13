@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ReCaptcha::Client do
 
   describe '#new' do
-    let(:configuration) { instance_double('ReCaptcha::Configuration') }
+    let(:configuration) { instance_double('ReCaptcha::Configuration', valid?: true) }
     let(:instance) { described_class.new(configuration) }
 
     it 'should not accept no parameters' do
