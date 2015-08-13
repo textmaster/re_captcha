@@ -1,5 +1,7 @@
 module ReCaptcha
   module Helper
+    # TODO: add language
+
     def recaptcha_tags
       html = ""
       html << %{<div class="g-recaptcha" data-sitekey="#{ReCaptcha.client.public_key}" data-stoken="#{ReCaptcha.client.secure_token}"></div>\n}

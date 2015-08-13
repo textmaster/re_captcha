@@ -3,10 +3,8 @@ require 'rest-client'
 module ReCaptcha
   module API
 
-    # TODO: handle 40x and 50x
-
     def post(path, params, options: {}, end_point: api_endpoint)
-      with_timeout do
+      http_request do
         uri      = URI(end_point).merge(path).to_s
         resource = RestClient::Resource.new(uri, options.merge(default_options))
         response = resource.post params.merge(default_params)
@@ -24,10 +22,10 @@ module ReCaptcha
       { read_timeout: 3, open_timeout: 3 }
     end
 
-    def with_timeout(&block)
+    def http_request(&block)
       block.call
-    rescue RestClient::RequestTimeout
-      { success: true }
+    rescue RestClient::RequestTimeout, RestClient::ExceptionWithResponse, RestClient::RequestFailed
+      { "success" => true }
     end
 
   end

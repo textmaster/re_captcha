@@ -1,4 +1,14 @@
 require 'rspec/core/rake_task'
+require 'gemfury'
+require 'gemfury/command'
+
+module Bundler
+  class GemHelper
+    def rubygem_push(path)
+      ::Gemfury::Command::App.start(['push', path])
+    end
+  end
+end
 
 desc "Open an irb session with ReCaptcha preloaded"
 task :console do
@@ -12,3 +22,4 @@ RSpec::Core::RakeTask.new(:spec) do |t|
 end
 
 task :default => :spec
+task test: :spec
