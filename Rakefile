@@ -1,6 +1,7 @@
 require 'rspec/core/rake_task'
 require 'gemfury'
 require 'gemfury/command'
+require 'bundler/gem_tasks'
 
 module Bundler
   class GemHelper
