@@ -25,7 +25,7 @@ module ReCaptcha
     def http_request(&block)
       block.call
     rescue RestClient::RequestTimeout, RestClient::ExceptionWithResponse, RestClient::RequestFailed
-      { "success" => true }
+      { "success" => !deny_on_error }
     end
 
   end

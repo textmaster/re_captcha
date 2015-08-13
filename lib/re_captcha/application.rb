@@ -9,7 +9,7 @@ module ReCaptcha
       return true if should_skip_verification?
       params = generate_verification_params(response, remote_ip)
       verification = verify_recaptcha(params)
-      valid = verification["success"]
+      valid = verification['success']
       add_error_on_model(model, message) unless valid
       valid
     end
@@ -21,7 +21,7 @@ module ReCaptcha
     private
 
     def verify_recaptcha(params)
-      post "api/siteverify", params, options: {verify_ssl: false}
+      post 'api/siteverify', params, options: {verify_ssl: false}
     end
 
     def generate_verification_params(response, remote_ip)

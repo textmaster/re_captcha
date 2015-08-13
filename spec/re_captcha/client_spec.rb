@@ -93,6 +93,27 @@ describe ReCaptcha::Client do
       end
     end
 
+    describe '#deny_on_error' do
+      subject(:deny_on_error) { instance.deny_on_error }
+
+      it 'delegates to configuration' do
+        expect(configuration).to receive(:deny_on_error)
+        instance.deny_on_error
+      end
+
+      it 'returns the correct value' do
+        expect(subject).to be_a(FalseClass)
+        expect(subject).to eq(false)
+      end
+    end
+
+    describe '#language_code' do
+      it 'delegates to configuration' do
+        expect(configuration).to receive(:language_code)
+        instance.language_code 'zh-CN'
+      end
+    end
+
     describe '#is_recaptcha_valid?' do
       context 'with a correct response' do
 
@@ -155,6 +176,19 @@ describe ReCaptcha::Client do
 
         it 'returns true' do
           expect(instance.is_recaptcha_valid?('foo')).to eq(true)
+        end
+      end
+
+      context 'with deny on error activated' do
+        context 'when Google responds with a 50X error' do
+          before(:all) do
+            stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify').to_return(:status => [500, 'Internal Server Error'])
+          end
+
+          it 'returns false' do
+            allow(instance).to receive(:deny_on_error) { true }
+            expect(instance.is_recaptcha_valid?('foo')).to eq(false)
+          end
         end
       end
     end

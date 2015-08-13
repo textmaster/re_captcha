@@ -9,6 +9,7 @@ describe ReCaptcha::Configuration do
     it { expect(instance).to respond_to(:private_key) }
     it { expect(instance).to respond_to(:skipped_env) }
     it { expect(instance).to respond_to(:language_code) }
+    it { expect(instance).to respond_to(:deny_on_error) }
 
     describe '#language_code' do
       context 'when the language table contains the locale' do

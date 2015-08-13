@@ -10,11 +10,12 @@ module ReCaptcha
 
     def initialize(configuration)
       @configuration = configuration
-      @env           = ENV['RACK_ENV'] || ENV['RAILS_ENV'] || "development"
+      @env           = ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'development'
     end
 
     def_delegators :@configuration, :api_endpoint,
-      :public_key, :private_key, :skipped_env, :language_code
+      :public_key, :private_key, :skipped_env, :language_code,
+      :deny_on_error
 
   end
 end
