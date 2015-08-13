@@ -13,7 +13,8 @@ module ReCaptcha
       @env           = ENV['RACK_ENV'] || ENV['RAILS_ENV'] || "development"
     end
 
-    def_delegators :@configuration, :api_endpoint, :public_key, :private_key, :skipped_env
+    def_delegators :@configuration, :api_endpoint,
+      :public_key, :private_key, :skipped_env, :language_code
 
   end
 end
