@@ -1,7 +1,7 @@
 module ReCaptcha
   class Configuration
     API_END_POINT = 'https://www.google.com/recaptcha/'
-    SKIPPED_ENVIRONMENTS = %w('test', 'cucumber')
+    SKIPPED_ENVIRONMENTS = %w(test cucumber)
     LANGUAGE_TABLE = {
       'en-US' => 'en',
       'fr-FR' => 'fr',
