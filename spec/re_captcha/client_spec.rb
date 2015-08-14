@@ -213,8 +213,11 @@ describe ReCaptcha::Client do
     end
 
     describe '#secure_token' do
+      let(:secure_token_builder) { instance_double("ReCaptcha::SecureTokenBuilder") }
+
       it 'delegates to SecureTokenBuilder' do
-        expect(ReCaptcha::SecureTokenBuilder).to receive(:build).with(instance.private_key)
+        ReCaptcha::SecureTokenBuilder.stub(:new).and_return(secure_token_builder)
+        expect(secure_token_builder).to receive(:build)
         instance.secure_token
       end
     end

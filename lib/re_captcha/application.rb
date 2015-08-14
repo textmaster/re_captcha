@@ -15,7 +15,8 @@ module ReCaptcha
     end
 
     def secure_token
-      SecureTokenBuilder.build(private_key)
+      secure_token_builder = SecureTokenBuilder.new(private_key)
+      secure_token_builder.build
     end
 
     private

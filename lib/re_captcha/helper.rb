@@ -3,7 +3,7 @@ module ReCaptcha
     def recaptcha_tags(options = {})
       html = ''
       html << %(<div class="g-recaptcha" data-sitekey="#{ReCaptcha.client.public_key}" )
-      html << %(data-stoken="#{secure_token}" #{tag_attributes(options)}></div>\n)
+      html << %(data-stoken="#{ReCaptcha.client.secure_token}" #{tag_attributes(options)}></div>\n)
       html.respond_to?(:html_safe) ? html.html_safe : html
     end
 
@@ -26,11 +26,6 @@ module ReCaptcha
 
     def language_query(language)
       "?hl=#{ReCaptcha.client.language_code(language)}" if language
-    end
-
-    def secure_token
-      secure_token_builder = ReCaptcha::SecureTokenBuilder.new(ReCaptcha.client.private_key)
-      secure_token_builder.build
     end
   end
 end
