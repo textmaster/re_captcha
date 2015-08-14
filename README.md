@@ -80,4 +80,6 @@ Assuming that your application uses Rails, verify the reCaptcha response using t
 recaptcha_valid?(response, remote_ip: nil, model: nil, message: nil)
 ```
 
+This method can be called like this in a controller: ```ReCaptcha.client.recaptcha_valid?(...)```
+
 The response should be retrieved with ```params.fetch(:"g-recaptcha-response", "")```.  Optional args model and message allow to add an error with the given message on the :base attr of the provided model.
