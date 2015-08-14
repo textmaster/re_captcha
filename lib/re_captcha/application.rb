@@ -6,17 +6,12 @@ module ReCaptcha
     include API
 
     def recaptcha_valid?(response, remote_ip: nil, model: nil, message: nil)
-      return true if should_skip_verification?
+      return true if skip_verification?
       params = generate_verification_params(response, remote_ip)
       verification = verify_recaptcha(params)
       valid = verification['success']
       add_error_on_model(model, message) unless valid
       valid
-    end
-
-    def secure_token
-      secure_token_builder = SecureTokenBuilder.new(private_key)
-      secure_token_builder.build
     end
 
     private
@@ -29,7 +24,7 @@ module ReCaptcha
       { response: response, secret: private_key, remoteip: remote_ip }
     end
 
-    def should_skip_verification?
+    def skip_verification?
       skipped_env.include? env
     end
 

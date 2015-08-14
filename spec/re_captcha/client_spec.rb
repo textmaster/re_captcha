@@ -48,7 +48,6 @@ describe ReCaptcha::Client do
     it { expect(instance).to respond_to(:api_endpoint) }
     it { expect(instance).to respond_to(:skipped_env) }
     it { expect(instance).to respond_to(:recaptcha_valid?) }
-    it { expect(instance).to respond_to(:secure_token) }
 
     describe '#private_key' do
       subject(:private_key) { instance.private_key }
@@ -209,16 +208,6 @@ describe ReCaptcha::Client do
             expect(instance.recaptcha_valid?('foo')).to eq(false)
           end
         end
-      end
-    end
-
-    describe '#secure_token' do
-      let(:secure_token_builder) { instance_double("ReCaptcha::SecureTokenBuilder") }
-
-      it 'delegates to SecureTokenBuilder' do
-        ReCaptcha::SecureTokenBuilder.stub(:new).and_return(secure_token_builder)
-        expect(secure_token_builder).to receive(:build)
-        instance.secure_token
       end
     end
   end
