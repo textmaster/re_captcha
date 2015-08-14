@@ -12,8 +12,8 @@ Gem::Specification.new do |gem|
   gem.description = 'Google reCaptcha helpers and verifier'
   gem.version = ReCaptcha::VERSION.dup
   gem.authors = ['David Jeusette']
-  gem.email = ['jeusette.david@gmail.com']
-  gem.homepage = 'https://github.com/djeusette/re_captcha'
+  gem.email = ['david@textmaster.com']
+  gem.homepage = 'https://github.com/textmaster/re_captcha'
   gem.require_paths = ['lib']
   gem.license = 'MIT'
 
