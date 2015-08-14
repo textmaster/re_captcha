@@ -3,21 +3,34 @@ require 'spec_helper'
 describe ReCaptcha::Client do
 
   describe '#new' do
-    let(:configuration) { instance_double('ReCaptcha::Configuration', valid?: true) }
-    let(:instance) { described_class.new(configuration) }
 
     it 'should not accept no parameters' do
       expect { described_class.new }.to raise_error ArgumentError
     end
 
-    it 'should accept (configuration) as parameter' do
-      expect(described_class).to receive(:new).with(configuration).and_return(instance)
-      expect { described_class.new(configuration) }.to_not raise_error
+    context 'with an invalid configuration' do
+      let(:configuration) { instance_double('ReCaptcha::Configuration', valid?: false) }
+
+      it 'should raise a ReCaptcha::ConfigurationError error' do
+        expect { described_class.new(configuration) }.to raise_error ReCaptcha::ConfigurationError
+      end
     end
 
-    it 'should return a proper instance' do
-      expect { described_class.new(configuration) }.to_not raise_error
+    context 'with a valid configuration' do
+      let(:configuration) { instance_double('ReCaptcha::Configuration', valid?: true) }
+      let(:instance) { described_class.new(configuration) }
+
+      it 'should accept (configuration) as parameter' do
+        expect(described_class).to receive(:new).with(configuration).and_return(instance)
+        expect { described_class.new(configuration) }.to_not raise_error
+      end
+
+      it 'should return a proper instance' do
+        expect { described_class.new(configuration) }.to_not raise_error
+      end
     end
+
+
   end
 
   describe 'instance' do

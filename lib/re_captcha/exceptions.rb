@@ -1,4 +1,3 @@
 module ReCaptcha
-  class Exception < StandardError; end
-  class ConfigurationError < Exception; end
+  class ConfigurationError < StandardError; end
 end
