@@ -3,7 +3,8 @@
 Gem to easily use reCaptcha
 
 Run tests with ``` rake ```
-Run console with preloaded library ``` rake console ```
+
+Run console with preloaded library with ``` rake console ```
 
 ## Getting started
 
