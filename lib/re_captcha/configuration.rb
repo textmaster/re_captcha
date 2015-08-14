@@ -29,7 +29,7 @@ module ReCaptcha
     end
 
     def language_code(locale)
-      @language_table[locale] || 'en'
+      @language_table[locale.to_s] || 'en'
     end
 
     def valid?
