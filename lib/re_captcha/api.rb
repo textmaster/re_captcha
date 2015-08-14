@@ -2,7 +2,6 @@ require 'rest-client'
 
 module ReCaptcha
   module API
-
     def post(path, params, options: {}, end_point: api_endpoint)
       http_request do
         uri      = URI(end_point).merge(path).to_s
@@ -25,8 +24,7 @@ module ReCaptcha
     def http_request(&block)
       block.call
     rescue RestClient::RequestTimeout, RestClient::ExceptionWithResponse, RestClient::RequestFailed
-      { "success" => !deny_on_error }
+      { 'success' => !deny_on_error }
     end
-
   end
 end

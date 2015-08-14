@@ -1,0 +1,76 @@
+
+AllCops:
+  RunRailsCops: true
+
+LineLength:
+  Max: 120
+
+Style/AlignParameters:
+  Enabled: false
+
+Style/Encoding:
+  EnforcedStyle: 'when_needed'
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/Blocks:
+  Enabled: false
+
+Style/TrailingComma:
+  Enabled: false
+
+Style/SingleSpaceBeforeFirstArg:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/AccessorMethodName:
+  Enabled: false
+
+Rails/ActionFilter:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Enabled: false
+
+DotPosition:
+  EnforcedStyle: leading
+
+PredicateName:
+  NamePrefixBlacklist:
+    - is_
+
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Style/CollectionMethods:
+  # Mapping from undesired method to desired_method
+  # e.g. to use `detect` over `find`:
+  #
+  # CollectionMethods:
+  #   PreferredMethods:
+  #     find: detect
+  PreferredMethods:
+    collect: 'map'
+    collect!: 'map!'
+    inject: 'reduce'
+    reduce: false
+    find: 'detect'
+    find_all: 'select'

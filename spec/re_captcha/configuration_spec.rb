@@ -14,13 +14,13 @@ describe ReCaptcha::Configuration do
     describe '#language_code' do
       context 'when the language table contains the locale' do
         it 'should return the correct language code' do
-          expect(instance.language_code("zh-CN")).to eq("zh-CN")
+          expect(instance.language_code('zh-CN')).to eq('zh-CN')
         end
       end
 
       context 'when the language table does not contain the locale' do
         it 'should return "en"' do
-          expect(instance.language_code("foo")).to eq("en")
+          expect(instance.language_code('foo')).to eq('en')
         end
       end
     end

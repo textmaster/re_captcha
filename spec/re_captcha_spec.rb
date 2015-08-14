@@ -5,7 +5,6 @@ describe ReCaptcha do
   it { expect(described_class).to respond_to(:configuration) }
   it { expect(described_class).to respond_to(:configure) }
 
-
   describe '.configure' do
     let(:configuration) { instance_double('ReCaptcha::Configuration') }
 
@@ -13,7 +12,6 @@ describe ReCaptcha do
       expect(described_class).to receive(:configure).and_yield(configuration)
       expect { |b| described_class.configure(&b) }.to yield_with_args(configuration)
     end
-
   end
 
   describe '.configuration' do

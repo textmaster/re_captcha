@@ -77,7 +77,7 @@ Check the reCaptcha doc for the available values (https://developers.google.com/
 
 Assuming that your application uses Rails, verify the reCaptcha response using the method below:
 ```
-is_recaptcha_valid?(response, remote_ip: nil, model: nil, message: nil)
+recaptcha_valid?(response, remote_ip: nil, model: nil, message: nil)
 ```
 
 The response should be retrieved with ```params.fetch(:"g-recaptcha-response", "")```.  Optional args model and message allow to add an error with the given message on the :base attr of the provided model.

@@ -1,8 +1,7 @@
 module ReCaptcha
   class Configuration
-
     API_END_POINT = 'https://www.google.com/recaptcha/'
-    SKIPPED_ENVIRONMENTS = ['test', 'cucumber']
+    SKIPPED_ENVIRONMENTS = %w('test', 'cucumber')
     LANGUAGE_TABLE = {
       'en-US' => 'en',
       'fr-FR' => 'fr',
@@ -36,6 +35,5 @@ module ReCaptcha
     def valid?
       !private_key.nil? && !public_key.nil?
     end
-
   end
 end

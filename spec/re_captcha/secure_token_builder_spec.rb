@@ -1,14 +1,17 @@
 require 'spec_helper'
 
 describe ReCaptcha::SecureTokenBuilder do
-  it { expect(described_class).to respond_to(:build) }
+  let(:key) { 'my secret key' }
+  let(:instance) { described_class.new(key)}
 
-  describe '.build' do
-    let(:key) { 'my secret key' }
+  describe 'instance' do
+    it { expect(instance).to respond_to(:build) }
 
-    it 'builds a secure token' do
-      expect(described_class.build(key)).to be_a(String)
-      expect(described_class.build(key)).not_to be_empty
+    describe '#build' do
+      it 'builds a secure token' do
+        expect(instance.build).to be_a(String)
+        expect(instance.build).not_to be_empty
+      end
     end
   end
 end

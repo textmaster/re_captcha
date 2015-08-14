@@ -3,7 +3,6 @@ require 'spec_helper'
 describe ReCaptcha::Client do
 
   describe '#new' do
-
     it 'should not accept no parameters' do
       expect { described_class.new }.to raise_error ArgumentError
     end
@@ -29,8 +28,6 @@ describe ReCaptcha::Client do
         expect { described_class.new(configuration) }.to_not raise_error
       end
     end
-
-
   end
 
   describe 'instance' do
@@ -50,7 +47,7 @@ describe ReCaptcha::Client do
     it { expect(instance).to respond_to(:public_key) }
     it { expect(instance).to respond_to(:api_endpoint) }
     it { expect(instance).to respond_to(:skipped_env) }
-    it { expect(instance).to respond_to(:is_recaptcha_valid?) }
+    it { expect(instance).to respond_to(:recaptcha_valid?) }
     it { expect(instance).to respond_to(:secure_token) }
 
     describe '#private_key' do
@@ -127,30 +124,36 @@ describe ReCaptcha::Client do
       end
     end
 
-    describe '#is_recaptcha_valid?' do
+    describe '#recaptcha_valid?' do
       context 'with a correct response' do
 
         before(:all) do
-          stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify').with(body: {"remoteip"=>"", "response"=>'correct response', "secret"=>"bar"}).to_return(status: 200, body: {success: true}.to_json)
+          body = { 'remoteip' => '', 'response' => 'correct response', 'secret' => 'bar' }
+          stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify')
+            .with(body: body)
+            .to_return(status: 200, body: { success: true }.to_json)
         end
 
         let(:response) { 'correct response' }
 
         it 'returns true' do
-          expect(instance.is_recaptcha_valid?(response)).to eq(true)
+          expect(instance.recaptcha_valid?(response)).to eq(true)
         end
       end
 
       context 'with an incorrect response' do
 
         before(:all) do
-          stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify').with(body: {"remoteip"=>"", "response"=>'incorrect response', "secret"=>"bar"}).to_return(status: 200, body: {success: false}.to_json)
+          body = { 'remoteip' => '', 'response' => 'incorrect response', 'secret' => 'bar' }
+          stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify')
+            .with(body: body)
+            .to_return(status: 200, body: { success: false }.to_json)
         end
 
         let(:response) { 'incorrect response' }
 
         it 'returns false' do
-          expect(instance.is_recaptcha_valid?(response)).to eq(false)
+          expect(instance.recaptcha_valid?(response)).to eq(false)
         end
       end
 
@@ -158,7 +161,7 @@ describe ReCaptcha::Client do
 
         it 'always returns true' do
           allow(instance).to receive(:env) { 'my-test' }
-          expect(instance.is_recaptcha_valid?('foo')).to eq(true)
+          expect(instance.recaptcha_valid?('foo')).to eq(true)
         end
       end
 
@@ -168,39 +171,42 @@ describe ReCaptcha::Client do
         end
 
         it 'returns true' do
-          expect(instance.is_recaptcha_valid?('foo')).to eq(true)
+          expect(instance.recaptcha_valid?('foo')).to eq(true)
         end
       end
 
       context 'when Google responds with a 40X error' do
         before(:all) do
-          stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify').to_return(:status => [401, 'Unauthorized'])
+          stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify')
+            .to_return(status: [401, 'Unauthorized'])
         end
 
         it 'returns true' do
-          expect(instance.is_recaptcha_valid?('foo')).to eq(true)
+          expect(instance.recaptcha_valid?('foo')).to eq(true)
         end
       end
 
       context 'when Google responds with a 50X error' do
         before(:all) do
-          stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify').to_return(:status => [500, 'Internal Server Error'])
+          stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify')
+            .to_return(status: [500, 'Internal Server Error'])
         end
 
         it 'returns true' do
-          expect(instance.is_recaptcha_valid?('foo')).to eq(true)
+          expect(instance.recaptcha_valid?('foo')).to eq(true)
         end
       end
 
       context 'with deny on error activated' do
         context 'when Google responds with a 50X error' do
           before(:all) do
-            stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify').to_return(:status => [500, 'Internal Server Error'])
+            stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify')
+              .to_return(status: [500, 'Internal Server Error'])
           end
 
           it 'returns false' do
             allow(instance).to receive(:deny_on_error) { true }
-            expect(instance.is_recaptcha_valid?('foo')).to eq(false)
+            expect(instance.recaptcha_valid?('foo')).to eq(false)
           end
         end
       end
@@ -212,6 +218,5 @@ describe ReCaptcha::Client do
         instance.secure_token
       end
     end
-
   end
 end

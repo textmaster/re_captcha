@@ -5,7 +5,11 @@ require 're_captcha/helper'
 module ReCaptcha
   extend Configurable
 
+  MUTEX = Mutex.new
+
   def self.client
-    @client ||= ReCaptcha::Client.new(configuration)
+    MUTEX.synchronize do
+      @client ||= ReCaptcha::Client.new(configuration)
+    end
   end
 end
