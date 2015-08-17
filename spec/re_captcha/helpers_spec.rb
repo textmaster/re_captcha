@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe ReCaptcha::Helper do
-  let(:dummy_class) { Class.new { include ReCaptcha::Helper } }
+describe ReCaptcha::Helpers do
+  let(:dummy_class) { Class.new { include ReCaptcha::Helpers } }
 
   before(:all) do
     ReCaptcha.configure do |config|

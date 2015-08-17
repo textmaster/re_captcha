@@ -1,5 +1,5 @@
 module ReCaptcha
-  module Helper
+  module Helpers
     def recaptcha_tags(options = {})
       html = ''
       html << %(<div class="g-recaptcha" data-sitekey="#{ReCaptcha.client.public_key}" )

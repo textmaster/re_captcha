@@ -5,13 +5,11 @@ module ReCaptcha
   module Application
     include API
 
-    def recaptcha_valid?(response, remote_ip: nil, model: nil, message: nil)
+    def recaptcha_valid?(response, remote_ip: nil)
       return true if skip_verification?
       params = generate_verification_params(response, remote_ip)
       verification = verify_recaptcha(params)
-      valid = verification['success']
-      add_error_on_model(model, message) unless valid
-      valid
+      verification['success']
     end
 
     private
@@ -26,10 +24,6 @@ module ReCaptcha
 
     def skip_verification?
       skipped_env.include? env
-    end
-
-    def add_error_on_model(model, message)
-      model.errors.add :base, message if model && message
     end
   end
 end

@@ -1,6 +1,6 @@
 require 're_captcha/configurable'
 require 're_captcha/client'
-require 're_captcha/helper'
+require 're_captcha/helpers'
 
 module ReCaptcha
   extend Configurable
@@ -12,4 +12,8 @@ module ReCaptcha
       @client ||= ReCaptcha::Client.new(configuration)
     end
   end
+end
+
+if defined?(Rails)
+  require 're_captcha/engine'
 end
