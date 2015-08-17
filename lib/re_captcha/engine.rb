@@ -9,7 +9,9 @@ module ReCaptcha
     end
 
     initializer 're_captcha.action_view.helpers' do
-      ApplicationHelper.send(:include, ReCaptcha::Helpers)
+      config.to_prepare do
+        ApplicationController.helper(ReCaptcha::Helpers)
+      end
     end
   end
 end
