@@ -1,6 +1,9 @@
 language: ruby
 rvm:
-  - "2.2"
-  - "2.1"
-  - "2.0"
-  - jruby-19mode
+- '2.2'
+- '2.1'
+- '2.0'
+- jruby-19mode
+notifications:
+  flowdock:
+    secure: U6uKW6PP/32WLdPsbcVj4TzT1Oyc8/YMS/NA+IGSrAJnJ9yTry+658dsq59nw8SV+bU1yQQL0KhXVaC0RxzWZgnG0O3RhFdXWULMNNoLle+cooW9I6dcmu3Hp7EnEU8/CDpTxxM8xqdqy20qhHOm6LfdPKDsWE6r7z47bT8ymMySlNZDN1b0xfsaAZXgIY2YQcIkISIDtTKv/wGN1kRrw5P6fv2uxh1b3p2UCY3u3Ke6v30V+9EIVT0SZrtYTWxMNxetqj50uOP9ONCDzSCU1NLg6JkqQzuM4jiddZBLcK7VBNB8coGqtSYPDO25f4rPXwl0iS+Hi5iXxpLaTxhG/CcG7nrBswF8+hS7P6MtROn4QPhZDzRBiDhcQGHoZ4bMlFed7CLiNSy0T3ybktB3jhkMRLPpAL/TdkvtV8ROAVVrKVYVeVUVreIhCP5sr5YaP7HP2C5KjKJFZls2InOa4uEjxaMZIwUtikutd818YLrr30kHa/+vcNIYJ4twxYoZig3H6zcQhCb1vHOjekrvW4w0fN1ypAUYZP20IkhD+lNUPsx+bXXvbR6/wfLx3t442tEV8rRLuZTkL9eu6DMMLjQrO3MObXp1a9ZPJAiIgWx/47FvJowIkkG6Ii0uYXyk/5IPEdBvUSsskG91XzMjo8mDL5/Yjd1evsIdLQHao2g=
