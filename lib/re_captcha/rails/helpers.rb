@@ -14,7 +14,7 @@ module ReCaptcha
       private
 
       def add_error_on_model(model, message)
-        model.errors.add :base, message if model && message
+        model.errors.add(:base, message) if model && message
       end
     end
   end
