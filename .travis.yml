@@ -6,7 +6,7 @@ rvm:
 
 matrix:
   include:
-     - rvm: jruby
+    - rvm: jruby
       env: JRUBY_OPTS="--2.0"
     - rvm: jruby-head
       env: JRUBY_OPTS="--2.1"
