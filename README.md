@@ -68,11 +68,45 @@ The options are the following (the default value is given):
 
 Check the reCaptcha doc for the available values (https://developers.google.com/recaptcha/docs/display).
 
+Here is an example that shows how to use the helpers in a view (haml)
+```ruby
+- content_for :scripts do
+  = recaptcha_script(language: I18n.locale)
+
+...
+
+= form_for @object, url: my_path, method: :post, html: { class: 'form' } do |form|
+  = form.text_area :message, placeholder: 'Message'
+  = recaptcha_tags
+  = form.submit 'Submit', class: 'submit btn blue-bg anim'
+```
+
 ## Verification
 
 Assuming that your application uses Rails, verify the reCaptcha response in your controller using the method ```recaptcha_valid?(model: nil, message: nil)```.
 
 model and message are optional and enables you to set an error message on the :base attribute of the provided model.
 
+Example
+```ruby
+def create
+  @user = User.new(user_params)
+
+  return error(t('invalid_recaptcha')) unless recaptcha_valid?
+
+  if @user.save
+    redirect_to root_path
+  else
+    error(t('user_error'))
+  end
+end
+
+private
+
+def error(message)
+  flash[:error] = message
+  render :new
+end
+```
 
 If you're not using Rails, this method can be called like this: ```ReCaptcha.client.recaptcha_valid?(response, remote_ip: nil)```.  No model nor message can be provided.
