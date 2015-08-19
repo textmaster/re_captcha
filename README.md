@@ -110,3 +110,50 @@ end
 ```
 
 If you're not using Rails, this method can be called like this: ```ReCaptcha.client.recaptcha_valid?(response, remote_ip: nil)```.  No model nor message can be provided.
+
+## Integration with devise
+
+1. Get your keys from [Google reCaptcha](https://www.google.com/recaptcha/).  The site key is the public key and the secret is the secret one.
+2. Install this gem
+```ruby
+# Gemfile
+gem 're_catpcha'
+```
+3. Add the tags in your views.  ```recaptcha_script``` may be added in your layout view.
+```ruby
+<%= recaptcha_script(...) %>
+
+...
+
+<%= recaptcha_tags(...) %>
+```
+4. Create your own controllers that inherit from the Devise controllers.
+  - For unlocks
+  ```ruby
+  class UnlocksController < Devise::UnlocksController
+    def create
+      if recaptcha_valid?
+        super
+      else
+        self.resource = resource_class.find_or_initialize_with_errors(resource_class.unlock_keys, resource_params, :not_found)
+        flash[:error] = t("invalid_recaptcha")
+        render :new
+      end
+    end
+  end
+
+  ```
+  - For passwords
+  ```ruby
+  class PasswordsController < Devise::PasswordsController
+    def create
+      if recaptcha_valid?
+        super
+      else
+        self.resource = resource_class.find_or_initialize_with_errors(resource_class.unlock_keys, resource_params, :not_found)
+        flash[:error] = t("invalid_recaptcha")
+        render :new
+      end
+    end
+  end
+  ```
