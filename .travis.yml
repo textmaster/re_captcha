@@ -3,15 +3,11 @@ rvm:
 - '2.2'
 - '2.1'
 - '2.0'
+- jruby-20mode
 
 matrix:
-  include:
-    - rvm: jruby
-      env: JRUBY_OPTS="--2.0"
-    - rvm: jruby-head
-      env: JRUBY_OPTS="--2.1"
   allow_failures:
-    - rvm: jruby-head
+    - rvm: jruby-20mode
   fast_finish: true
 
 notifications:
