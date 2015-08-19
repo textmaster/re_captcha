@@ -113,13 +113,13 @@ If you're not using Rails, this method can be called like this: ```ReCaptcha.cli
 
 ## Integration with devise
 
-1. Get your keys from [Google reCaptcha](https://www.google.com/recaptcha/).  The site key is the public key and the secret is the secret one.
-2. Install this gem
+- Get your keys from [Google reCaptcha](https://www.google.com/recaptcha/).  The site key is the public key and the secret is the secret one.
+- Install this gem
 ```ruby
 # Gemfile
 gem 're_captcha'
 ```
-3. Add the tags in your views.  ```recaptcha_script``` may be added in your layout view.
+- Add the tags in your views.  ```recaptcha_script``` may be added in your layout view.
 ```
 <%= recaptcha_script(...) %>
 
@@ -127,7 +127,7 @@ gem 're_captcha'
 
 <%= recaptcha_tags(...) %>
 ```
-4. Create your own controllers that inherit from the Devise controllers.
+- Create your own controllers that inherit from the Devise controllers.
   - For unlocks
   ```ruby
   class UnlocksController < Devise::UnlocksController
