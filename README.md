@@ -117,10 +117,10 @@ If you're not using Rails, this method can be called like this: ```ReCaptcha.cli
 2. Install this gem
 ```ruby
 # Gemfile
-gem 're_catpcha'
+gem 're_captcha'
 ```
 3. Add the tags in your views.  ```recaptcha_script``` may be added in your layout view.
-```ruby
+```
 <%= recaptcha_script(...) %>
 
 ...
@@ -157,3 +157,6 @@ gem 're_catpcha'
     end
   end
   ```
+  - etc
+
+Other examples are given on the [Devise Wiki](https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise) for [Recaptcha Gem](https://github.com/ambethia/recaptcha).  The use case is similar and examples can be easily adapted.
