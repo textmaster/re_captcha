@@ -1,6 +1,8 @@
 # ReCaptcha
 
-Gem to easily use reCaptcha
+Gem to easily use [Google reCaptcha](https://www.google.com/recaptcha/)
+
+The gem implements v2 of the reCaptcha API.
 
 Run tests with ``` rake ```
 
@@ -10,7 +12,7 @@ Run console with preloaded library with ``` rake console ```
 
 You may need to configure the gem with non default values:
 
-```
+```ruby
 ReCaptcha.configure do |config|
   config.private_key = "secret key"
   config.public_key  = "site key"
@@ -19,16 +21,16 @@ end
 ```
 
 The options are:
-- private_key (default: ENV['RECAPTCHA_PRIVATE_KEY'])
-- public_key (default: ENV['RECAPTCHA_PUBLIC_KEY'])
-- api_endpoint (default: https://www.google.com/recaptcha/)
-- skipped_env (default: ['test', 'cucumber'])
-- language_table: the table to map locale with language code
-- deny_on_error: if the Google reCaptcha API can't be accessed, deny the verification (default: false)
+- `private_key` (default: `ENV['RECAPTCHA_PRIVATE_KEY']`)
+- `public_key` (default: `ENV['RECAPTCHA_PUBLIC_KEY']`)
+- `api_endpoint` (default: https://www.google.com/recaptcha/)
+- `skipped_env` (default: `['test', 'cucumber']`)
+- `language_table`: the table to map locale with language code
+- `deny_on_error`: if the Google reCaptcha API can't be accessed, deny the verification (default: `false`)
 
 The default language table is the following:
 
-```
+```ruby
 {
   'en-US' => 'en',
   'fr-FR' => 'fr',
