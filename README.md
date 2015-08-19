@@ -8,7 +8,7 @@ Run console with preloaded library with ``` rake console ```
 
 ## Getting started
 
-You first need to configure the gem.
+You may need to configure the gem with non default values:
 
 ```
 ReCaptcha.configure do |config|
@@ -18,7 +18,9 @@ end
 
 ```
 
-Other options are:
+The options are:
+- private_key (default: ENV['RECAPTCHA_PRIVATE_KEY'])
+- public_key (default: ENV['RECAPTCHA_PUBLIC_KEY'])
 - api_endpoint (default: https://www.google.com/recaptcha/)
 - skipped_env (default: ['test', 'cucumber'])
 - language_table: the table to map locale with language code
@@ -44,27 +46,15 @@ The default language table is the following:
 
 ## Display
 
-To access the helpers in the views, make sure to include them in a Helper class
-such as ApplicationHelper (Rails)
+The view helpers are automatically included in a Rails app.  If you're not using Rails, include the helpers with ```include ReCaptcha::Helpers```.
 
-```
-module ApplicationHelper
-  include ReCaptcha::Helper
-end
-```
+The available helper methods are the following:
 
-Then include the script tag using this helper method in your view:
-```
-recaptcha_script(language: nil)
-```
-language is one of the locale defined in the language table.
+- ```recaptcha_script(language: nil)``` includes the script tag in the view.  Language is one of the locale defined in the language table.
 
-You can now add the reCaptcha box in your forms:
-```
-recaptcha_tags(options = {})
-```
+- ```recaptcha_tags(options = {})``` adds the reCaptcha box in the view.
 
-The options are the following:
+The options are the following (the default value is given):
 - theme: 'light'
 - type: 'image'
 - size: 'normal'
@@ -76,11 +66,9 @@ Check the reCaptcha doc for the available values (https://developers.google.com/
 
 ## Verification
 
-Assuming that your application uses Rails, verify the reCaptcha response using the method below:
-```
-recaptcha_valid?(response, remote_ip: nil, model: nil, message: nil)
-```
+Assuming that your application uses Rails, verify the reCaptcha response in your controller using the method ```recaptcha_valid?(model: nil, message: nil)```.
 
-This method can be called like this in a controller: ```ReCaptcha.client.recaptcha_valid?(...)```
+model and message are optional and enables you to set an error message on the :base attribute of the provided model.
 
-The response should be retrieved with ```params.fetch(:"g-recaptcha-response", "")```.  Optional args model and message allow to add an error with the given message on the :base attr of the provided model.
+
+If you're not using Rails, this method can be called like this: ```ReCaptcha.client.recaptcha_valid?(response, remote_ip: nil)```.  No model nor message can be provided.
