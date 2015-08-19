@@ -1,5 +1,7 @@
 # ReCaptcha
 
+[![Build Status](https://travis-ci.org/textmaster/re_captcha.svg?branch=master)](https://travis-ci.org/textmaster/re_captcha)
+
 Gem to easily use [Google reCaptcha](https://www.google.com/recaptcha/)
 
 The gem implements v2 of the reCaptcha API.
