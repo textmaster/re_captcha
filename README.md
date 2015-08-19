@@ -1,6 +1,7 @@
 # ReCaptcha
 
 [![Build Status](https://travis-ci.org/textmaster/re_captcha.svg?branch=master)](https://travis-ci.org/textmaster/re_captcha)
+[![Code Climate](https://codeclimate.com/github/textmaster/re_captcha/badges/gpa.svg)](https://codeclimate.com/github/textmaster/re_captcha)
 
 Gem to easily use [Google reCaptcha](https://www.google.com/recaptcha/)
 
