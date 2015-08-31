@@ -36,7 +36,7 @@ module ReCaptcha
     end
 
     def valid?
-      add_errors
+      set_errors
       errors.empty?
     end
 
@@ -44,7 +44,7 @@ module ReCaptcha
 
     attr_writer :errors
 
-    def add_errors
+    def set_errors
       self.errors = []
       errors << "missing private key" if private_key.nil?
       errors << "missing public key" if public_key.nil?
