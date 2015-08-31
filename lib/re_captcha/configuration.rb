@@ -19,6 +19,8 @@ module ReCaptcha
     attr_accessor :api_endpoint, :public_key,
       :private_key, :skipped_env, :language_table, :deny_on_error
 
+    attr_reader :errors
+
     def initialize
       @api_endpoint   = API_END_POINT
       @skipped_env    = SKIPPED_ENVIRONMENTS
@@ -26,6 +28,7 @@ module ReCaptcha
       @private_key    = ENV['RECAPTCHA_PRIVATE_KEY']
       @language_table = LANGUAGE_TABLE
       @deny_on_error  = false
+      @errors         = []
     end
 
     def language_code(locale)
@@ -33,7 +36,18 @@ module ReCaptcha
     end
 
     def valid?
-      !private_key.nil? && !public_key.nil?
+      add_errors
+      errors.empty?
+    end
+
+    private
+
+    attr_writer :errors
+
+    def add_errors
+      self.errors = []
+      errors << "missing private key" if private_key.nil?
+      errors << "missing public key" if public_key.nil?
     end
   end
 end

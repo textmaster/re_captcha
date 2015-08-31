@@ -1,21 +1,23 @@
 module ReCaptcha
   class ConfigurationError < StandardError
-    def initialize(name)
-      super(compose_message(name))
+    def initialize(name, configuration)
+      super(compose_message(name, configuration: configuration))
     end
 
     private
 
-    def compose_message(name)
-      problem = name
-      resolution = ''
-      resolution << %(\nMake sure to have configured the gem using the configure block)
-      resolution << %(\nReCaptcha.configure do |config|)
-      resolution << %(\n\tconfig.private_key = "private_key")
-      resolution << %(\n\tconfig.public_key = "public_key")
-      resolution << %(\nend)
+    def compose_message(name, configuration: nil)
+      title = name
+      problems = ": #{configuration.errors.join(', ')}" unless configuration.nil?
+      resolution = <<-END
+        \nMake sure to have configured the gem using the configure block
+        ReCaptcha.configure do |config|
+        \tconfig.private_key = "private_key"
+        \tconfig.public_key = "public_key"
+        end
+      END
 
-      "#{problem} #{resolution}"
+      title + problems + resolution
     end
   end
 end
