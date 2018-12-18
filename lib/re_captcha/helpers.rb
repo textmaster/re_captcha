@@ -3,7 +3,7 @@ module ReCaptcha
     def recaptcha_tags(options = {})
       html = ''
       html << %(<div class="g-recaptcha" data-sitekey="#{ReCaptcha.client.public_key}" )
-      html << %(data-stoken="#{secure_token}" #{tag_attributes(options)}></div>\n)
+      html << %(#{tag_attributes(options)}></div>\n)
       format_html(html)
     end
 
@@ -17,12 +17,6 @@ module ReCaptcha
 
     def format_html(html)
       html.respond_to?(:html_safe) ? html.html_safe : html
-    end
-
-    def secure_token
-      private_key = ReCaptcha.client.private_key
-      secure_token_builder = SecureTokenBuilder.new(private_key)
-      secure_token_builder.build
     end
 
     def tag_attributes(theme: 'light', type: 'image', size: 'normal',
