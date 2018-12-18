@@ -127,7 +127,7 @@ describe ReCaptcha::Client do
       context 'with a correct response' do
 
         before(:all) do
-          body = { 'remoteip' => '', 'response' => 'correct response', 'secret' => 'bar' }
+          body = { 'remoteip' => nil, 'response' => 'correct response', 'secret' => 'bar' }
           stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify')
             .with(body: body)
             .to_return(status: 200, body: { success: true }.to_json)
@@ -143,7 +143,7 @@ describe ReCaptcha::Client do
       context 'with an incorrect response' do
 
         before(:all) do
-          body = { 'remoteip' => '', 'response' => 'incorrect response', 'secret' => 'bar' }
+          body = { 'remoteip' => nil, 'response' => 'incorrect response', 'secret' => 'bar' }
           stub_request(:post, 'https://www.google.com/recaptcha/api/siteverify')
             .with(body: body)
             .to_return(status: 200, body: { success: false }.to_json)
