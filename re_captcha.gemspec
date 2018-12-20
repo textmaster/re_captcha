@@ -1,10 +1,10 @@
 require File.expand_path('../lib/re_captcha/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.add_development_dependency 'rspec', '~> 3.0'
-  gem.add_development_dependency 'bundler', '~> 1.7'
-  gem.add_development_dependency 'rake', '~> 10.0'
-  gem.add_development_dependency 'webmock', '~> 1.21'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'bundler'
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'webmock'
 
   gem.name = 're_captcha'
   gem.summary = 'reCaptcha helpers'
