@@ -1,5 +1,4 @@
 require 're_captcha/api'
-require 're_captcha/secure_token_builder'
 
 module ReCaptcha
   module Application
