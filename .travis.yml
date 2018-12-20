@@ -1,14 +1,7 @@
 language: ruby
 rvm:
-- '2.2'
-- '2.1'
-- '2.0'
-- jruby-20mode
-
-matrix:
-  allow_failures:
-    - rvm: jruby-20mode
-  fast_finish: true
+  - 2.4.4
+  - 2.5.3
 
 notifications:
   flowdock:
