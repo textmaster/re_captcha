@@ -27,18 +27,107 @@ describe ReCaptcha::Configuration do
 
     describe '#valid?' do
       context 'when private and public keys are given' do
-        it 'should return true' do
-          allow(instance).to receive(:private_key) { 'foo' }
-          allow(instance).to receive(:public_key) { 'bar' }
+        before(:each) do
+          instance.private_key = 'foo'
+          instance.public_key = 'bar'
+        end
+
+        it 'returns true' do
           expect(instance.valid?).to eq(true)
+        end
+
+        it 'sets no errors' do
+          instance.valid?
+          expect(instance.errors.size).to be(0)
+        end
+
+        context 'when calling twice the method' do
+          it 'is still valid' do
+            instance.valid?
+            expect(instance.valid?).to eq(true)
+          end
+
+          it 'sets no errors' do
+            2.times { instance.valid? }
+            expect(instance.errors.size).to be(0)
+          end
         end
       end
 
-      context 'when the private or public key is missing' do
-        it 'should return false' do
-          allow(instance).to receive(:public_key) { 'bar' }
-          allow(instance).to receive(:private_key) { nil }
+      context 'when the private key is missing' do
+        before(:each) do
+          instance.public_key = 'bar'
+        end
+
+        it 'returns false' do
           expect(instance.valid?).to eq(false)
+        end
+
+        it 'sets one error' do
+          instance.valid?
+          expect(instance.errors.size).to be(1)
+        end
+
+        context 'when calling twice the method' do
+          it 'is still invalid' do
+            instance.valid?
+            expect(instance.valid?).to eq(false)
+          end
+
+          it 'sets only one error' do
+            2.times { instance.valid? }
+            expect(instance.errors.size).to be(1)
+          end
+        end
+      end
+
+      context 'when the public key is missing' do
+        before(:each) do
+          instance.private_key = 'foo'
+        end
+
+        it 'returns false' do
+          expect(instance.valid?).to eq(false)
+        end
+
+        it 'sets one error' do
+          instance.valid?
+          expect(instance.errors.size).to be(1)
+        end
+
+        context 'when calling twice the method' do
+          it 'is still invalid' do
+            instance.valid?
+            expect(instance.valid?).to eq(false)
+          end
+
+          it 'sets only one error' do
+            2.times { instance.valid? }
+            expect(instance.errors.size).to be(1)
+          end
+        end
+      end
+
+      context 'when both the public and the private keys are missing' do
+        it 'should return false' do
+          expect(instance.valid?).to eq(false)
+        end
+
+        it 'sets two errors' do
+          instance.valid?
+          expect(instance.errors.size).to be(2)
+        end
+
+        context 'when calling twice the method' do
+          it 'is still invalid' do
+            instance.valid?
+            expect(instance.valid?).to eq(false)
+          end
+
+          it 'sets only two errors' do
+            2.times { instance.valid? }
+            expect(instance.errors.size).to be(2)
+          end
         end
       end
     end

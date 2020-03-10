@@ -8,7 +8,7 @@ describe ReCaptcha::Client do
     end
 
     context 'with an invalid configuration' do
-      let(:configuration) { instance_double('ReCaptcha::Configuration', valid?: false) }
+      let(:configuration) { ReCaptcha::Configuration.new }
 
       it 'should raise a ReCaptcha::ConfigurationError error' do
         expect { described_class.new(configuration) }.to raise_error ReCaptcha::ConfigurationError
