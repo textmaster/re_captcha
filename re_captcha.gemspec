@@ -18,4 +18,6 @@ Gem::Specification.new do |gem|
 
   gem.files = `git ls-files`.split("\n")
   gem.test_files = `git ls-files -- spec/*`.split("\n")
+
+  gem.add_runtime_dependency 'rest-client', '>= 1.8.0'
 end
