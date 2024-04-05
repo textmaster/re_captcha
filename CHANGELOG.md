@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Adding `rest-client` as a runtime dependency
+## 0.2.2
+
+- Adding `rest-client` as a runtime dependency (#4)
+
+## 0.2.1
+
+_No changelog_
+
+## 0.1.2
+
+_No changelog_
 
 ## 0.0.1
 
